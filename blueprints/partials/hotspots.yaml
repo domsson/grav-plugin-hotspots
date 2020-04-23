@@ -1,0 +1,46 @@
+form:
+    fields:
+        header.hotspots.name:
+            type: text
+            label: PLUGIN_HOTSPOTS.NAME
+            toggleable: true
+        header.hotspots.image:
+            type: pagemediaselect
+            label: PLUGIN_HOTSPOTS.IMAGE
+        header.hotspots.number:
+            type: toggle
+            label: PLUGIN_HOTSPOTS.NUMBER
+            highlight: 1
+            options:
+                1: PLUGIN_HOTSPOTS.YES
+                0: PLUGIN_HOTSPOTS.NO
+            validate:
+                type: bool
+        header.hotspots.spots:
+            type: list
+            label: PLUGIN_HOTSPOTS.SPOTS
+            fields:
+                .title:
+                    type: text
+                    label: PLUGIN_HOTSPOTS.SPOT_TITLE
+                .description:
+                    type: text
+                    label: PLUGIN_HOTSPOTS.SPOT_DESCR
+                .top:
+                    type: number
+                    label: PLUGIN_HOTSPOTS.SPOT_TOP
+                .left:
+                    type: number
+                    label: PLUGIN_HOTSPOTS.SPOT_LEFT
+                .radius:
+                    type: number
+                    label: PLUGIN_HOTSPOTS.SPOT_RADIUS
+                .label:
+                    type: text
+                    label: PLUGIN_HOTSPOTS.SPOT_LABEL
+                    toggleable: true
+                .class:
+                    type: text
+                    label: PLUGIN_HOTSPOTS.SPOT_CLASS
+                    toggleable: true
+

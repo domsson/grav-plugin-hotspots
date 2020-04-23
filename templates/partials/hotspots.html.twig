@@ -1,0 +1,62 @@
+{% set cfg = config.plugins.hotspots %}
+{% set hdr = page.header.hotspots %}
+
+{% if cfg.defer_js %}
+	{% do assets.addJs('plugin://hotspots/js/hotspots.js', { loading: 'defer' }) %}
+{% else %}
+	{% do assets.addJs('plugin://hotspots/js/hotspots.js') %}
+{% endif %}
+
+{% if cfg.built_in_css %}
+	{% do assets.addCSS('plugin://hotspots/css/hotspots.css') %}
+{% endif %}
+
+{% set name = hdr.name ? hdr.name|hyphenize : page.slug %}
+{% set img = page.media[hdr.image] %}
+<{{ cfg.container }} {{ cfg.attribute }}="{{ name }}">
+	<svg version="1.1" id="{{ name }}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {{ img.width }} {{ img.height }}" preserveAspectRatio="xMinYMin">
+		<image width="{{ img.width }}" height="{{ img.height }}" xlink:href="{{ img.url }}"></image>
+		{% set i = 0 %}
+		{% for spot in hdr.spots %}
+		{% set i = i + 1 %}
+		<g class="area">
+			{% set anchor = "#" ~ name ~ "_" ~ spot.title|hyphenize %}
+			{% set label = spot.label ? spot.label : (hdr.number ? i : null) %}
+			{% set class = spot.class ? 'class="' ~ spot.class ~ '"' : "" %}
+			{% set x = spot.left %}
+			{% set y = spot.top %}
+			{% set r = spot.radius %}
+			{% set path = r / 1.25 %}
+			<a xlink:href="{{ anchor }}" {{ class }}>
+				<circle cx="{{ x }}" cy="{{ y }}" r="{{ r }}"/>
+				{% if label %}
+				<text x="{{ x }}" y="{{ y }}" dominant-baseline="central" text-anchor="middle">{{ label }}</text>
+				{% else %}
+				<path d="M{{ x - (path/2) }} {{ y }} h{{ path }} M{{ x }} {{ y - (path/2) }} v{{ path }}" stroke-width="{{ r / 5 }}" stroke-linecap="round"/>
+				{% endif %}
+			</a>
+		</g>
+		{% endfor %}
+	</svg>
+	<dl>
+	{% for spot in hdr.spots %}
+		<div id="{{ name }}_{{ spot.title|hyphenize }}">
+			<dt class="title">{{ spot.title }}</dt>
+			<dd class="descr">{{ spot.description }}</dd>
+		</div>
+	{% endfor %}
+	</dl>
+	<script>
+		document.addEventListener('DOMContentLoaded', (event) => {
+			(new Hotspots({
+				"attribute": "{{ cfg.attribute }}",
+				"name": "{{ name }}",
+				"area_active": "{{ cfg.area_class_active }}",
+				"box_class": "{{ cfg.box_class }}",
+				"box_active": "{{ cfg.box_class_active }}",
+				"box_hidden": "{{ cfg.box_class_hidden }}",
+				"box_padding": {{ hdr.box_padding|default(20) }}
+			})).init();
+		});
+	</script>
+</{{ cfg.container }}>

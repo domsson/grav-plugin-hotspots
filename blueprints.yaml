@@ -1,0 +1,70 @@
+name: Hotspots
+version: 0.1.0
+description: Enables the creation of images with hotspots
+icon: plus-circle
+author:
+    name: Julien Dau
+    email: julien.d.dau@gmail.com
+homepage: https://github.com/domsson/grav-plugin-hotspots
+keywords: grav, plugin, etc
+bugs: https://github.com/domsson/grav-plugin-hotspots/issues
+docs: https://github.com/domsson/grav-plugin-hotspots/blob/develop/README.md
+license: MIT
+
+dependencies:
+    - { name: grav, version: '>=1.6.0' }
+
+form:
+    validation: loose
+    fields:
+        enabled:
+            type: toggle
+            label: PLUGIN_HOTSPOTS.ENABLED
+            highlight: 1
+            default: 0
+            options:
+                1: PLUGIN_HOTSPOTS.YES
+                0: PLUGIN_HOTSPOTS.NO
+            validate:
+                type: bool
+        defer_js:
+            type: toggle
+            label: PLUGIN_HOTSPOTS.DEFER_JS
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_HOTSPOTS.YES
+                0: PLUGIN_HOTSPOTS.NO
+        built_in_css: 
+            type: toggle
+            label: PLUGIN_HOTSPOTS.BUILT_IN_CSS
+            highlight: 1
+            default: 1
+            options:
+                1: PLUGIN_HOTSPOTS.YES
+                0: PLUGIN_HOTSPOTS.NO
+        container:
+            type: text
+            label: PLUGIN_HOTSPOTS.CONTAINER
+            default: "div"
+        attribute:
+            type: text
+            label: PLUGIN_HOTSPOTS.ATTRIBUTE
+            default: "data-hotspots"
+        area_class_active:
+            type: text
+            label: PLUGIN_HOTSPOTS.AREA_CLASS_ACTIVE 
+            default: "active"
+        box_class:
+            type: text
+            label: PLUGIN_HOTSPOTS.BOX_CLASS
+            default: "hotspots-box"
+        box_class_active:
+            type: text
+            label: PLUGIN_HOTSPOTS.BOX_CLASS_ACTIVE 
+            default: "active"
+        box_class_hidden:
+            type: text
+            label: PLUGIN_HOTSPOTS.BOX_CLASS_HIDDEN 
+            default: "hidden"
+

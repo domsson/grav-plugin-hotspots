@@ -1,0 +1,11 @@
+enabled: true
+active: true
+
+defer_js: true
+built_in_css: true
+attribute: "data-hotspots"
+container: "div"
+area_class_active: "active"
+box_class: "hotspots-box"
+box_class_active: "active"
+box_class_hidden: "hidden"
